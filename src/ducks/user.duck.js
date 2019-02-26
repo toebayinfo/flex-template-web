@@ -472,7 +472,15 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
       tos_shown_and_accepted: true,
     };
   } else if (isNewAPI && !isIndividualAccount) {
-    // TODO new company accounst
+    params = {
+      business_type: 'company',
+      company: {
+        name: companyName,
+        address: omitBy(addressValue, isUndefined),
+        tax_id: companyTaxId,
+      },
+      tos_shown_and_accepted: true,
+    };
   } else {
     params = {
       legal_entity: {
